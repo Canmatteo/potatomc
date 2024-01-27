@@ -1,0 +1,26 @@
+body {
+    background-image:
+        linear-gradient(rgba(0, 0, 0, .4), rgba(0, 0, 0, .4)),
+        url('/assets/image/background.jpg');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.img-hover {
+    cursor: pointer;
+    transition: all 0.25s;
+}
+
+.img-hover:hover {
+    transform: scale(1.05);
+}
+
+.blur-bg {
+    backdrop-filter: blur(10px) brightness(80%);
+}
+
+.ul-nb {
+    list-style-type: none;
+}

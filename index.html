@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PotatoMC - Home</title>
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/image/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/image/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/image/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/assets/image/favicon/site.webmanifest">
+    <!-- Favicon end -->
+
+    <link rel="stylesheet" href="/assets/styles/main.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="/assets/styles/js-snackbar.css">
+</head>
+
+<body data-bs-theme="dark">
+    <div id="particles-js"></div>
+    <div class="position-absolute top-50 start-50 translate-middle text-center">
+        <img src="/assets/image/logo.png" alt="Logo" width="100">
+        <h1 class="display-6 text-white">POTATOMC</h1>
+        <p class="text-white" style="--bs-text-opacity: .8;">Herzlich willkommen auf unserer Homepage!</p>
+        <hr class="text-white" style="border-width: 1.5px;">
+        <br>
+        <div class="container px-4 text-center">
+            <div class="row gx-5">
+                <a class="col img-hover" href="/store" style="text-decoration: none;">
+                    <img src="/assets/image/vip_plus_rank.png" width="100">
+                    <div class="text-white" style="--bs-text-opacity: .65;">
+                        <p style=" margin:0;">Besuche unseren</p>
+                        <p class="display-6 fw-bold" style="font-size: 1.5rem;">STORE</p>
+                    </div>
+                </a>
+                <a class="col img-hover" href="https://discord.gg/kVSH5ZwjTV" style="text-decoration: none;">
+                    <img src="/assets/image/discord_book.png" width="100">
+                    <div class="text-white" style="--bs-text-opacity: .65;">
+                        <p style=" margin:0;">Chatte mit uns bei</p>
+                        <p class="display-6 fw-bold" style="font-size: 1.5rem;">DISCORD</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <br>
+        <div class="card" style="background-color: #1caaae;" id="player_stat_card">
+            <div class="card-body text-white" style="padding:5px;">
+                spiele mit <strong id="players_online"
+                    style="background-color: #00000034; padding:3px;border-radius: 2px;">0 Spielern</strong> gemeinsam
+                auf <strong id="ip" style="background-color: #00000034; padding:3px;border-radius: 2px;cursor:pointer;"
+                    onclick="copyIp()">potatomc.ddnsfree.com</strong>
+            </div>
+        </div>
+    </div>
+
+    <!--CDN scripts follow:-->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"
+        integrity="sha512-Kef5sc7gfTacR7TZKelcrRs15ipf7+t+n7Zh6mKNJbmW+/RRdCW9nwfLn4YX0s2nO6Kv5Y2ChqgIakaC6PW09A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/assets/scripts/main.js"></script>
+    <script src="/assets/scripts/js-snackbar.js"></script>
+    <script src="/assets/scripts/home.js"></script>
+</body>
+
+</html>

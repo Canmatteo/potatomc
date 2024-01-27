@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PotatoMC - Store</title>
+
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/image/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/image/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/image/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/assets/image/favicon/site.webmanifest">
+  <!-- Favicon end -->
+
+  <link rel="stylesheet" href="/assets/styles/main.css">
+  <link rel="stylesheet" href="/assets/styles/js-snackbar.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    integrity="sha384-4LISF5TTJX/fLmGSxO53rV4miRxdg84mZsxmO8Rx5jGtp/LbrixFETvWa5a6sESd" crossorigin="anonymous">
+</head>
+
+<body data-bs-theme="dark" style="padding-top: 65px;">
+  <nav class="navbar fixed-top bg-body-transparent blur-bg" style="z-index:2000;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">
+        <img src="/assets/image/logo.png" alt="Logo" width="50" class="d-inline-block align-text-top">
+      </a>
+      <div class="d-flex">
+        <div class="dropstart">
+          <button class="btn btn-outline-warning dropdown-toggle" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false" id="profile_username">
+            <div class="spinner-border spinner-border-sm" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </button>
+          <ul class="dropdown-menu">
+            <li>
+              <p class="text-warning ms-3 mt-1"><img src="/assets/image/potato.png" width="16"> Potatoes: <strong
+                  id="profile_balance">0</strong></p>
+            </li>
+            <li>
+              <p class="ms-3 mt-1">Rang: <strong
+                  id="profile_rank" style="color:gray;">Spieler</strong></p>
+            </li>
+            <li><a class="dropdown-item" href="/logout"><i class="bi bi-door-closed"></i> Abmelden</a></li>
+          </ul>
+        </div>
+
+        <div class="dropstart ms-3" id="cart_dd">
+          <button class="btn btn-outline-warning dropdown-toggle" type="button" data-bs-toggle="dropdown"
+            data-bs-auto-close="outside" aria-expanded="false" id="cart_btn"><i class="bi bi-cart"></i>
+            Warenkorb</button>
+          <ul class="dropdown-menu">
+            <li>
+              <p class="text-light ms-3 mt-1">Artikel (<span class="text-success fw-bold"
+                  id="cart_dd_articles_count">0</span>):
+              </p>
+              <ul id="cart_dd_articles" class="ul-nb">
+                <!-- Article cards get generated in js -->
+              </ul>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li>
+              <button id="cart_go_to_checkout" class="dropdown-item btn btn-success">Zur Kasse
+                gehen</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Store view hidden by default -->
+
+  <div id="store" style="display:none;" class="mt-5 container">
+    <div class="text-white text-center">
+      <img src="/assets/image/store.png" width="100">
+      <h1 class="display-5">Store</h1>
+      <p>Hier kannst du dir Ränge, sowie weitere In-Game-Artikel zulegen.</p>
+    </div>
+
+    <br>
+
+    <div id="articles" class="row g-4 justify-content-center"></div>
+    <br>
+    <p>*Die Features des niedrigeren Rangs sind auch inkludiert.</p>
+
+  </div>
+
+  <div id="loading" class="position-absolute top-50 start-50 translate-middle text-center text-white">
+    <div>
+      <div class="spinner-border" style="width: 4rem; height: 4rem;" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+
+      <h1 class="display-6">Bitte warten...</h1>
+    </div>
+  </div>
+
+  <div id="checkout" class="mt-5 container" style="display:none;">
+    <div class="text-light">
+      <h1 class="display-5">Kasse</h1>
+      <p>Hier kannst du deine Artikel bezahlen und erhalten.</p>
+    </div>
+    <hr>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Artikel</th>
+          <th scope="col">Preis</th>
+          <th scope="col">Laufzeit</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider" id="checkout_articles"></tbody>
+    </table>
+    <hr>
+    <h5>Summe: <span id="checkout_sum" class="fw-bold"></span> <img src="/assets/image/potato.png" width="25"></h5>
+    <button class="btn btn-warning d-flex" id="checkout_confirm">
+      <div id="checkout_confirm_loading" class="me-2" style="display:none;"> <span
+          class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+        <span class="visually-hidden" role="status">Loading...</span>
+      </div> Bezahlen
+    </button>
+  </div>
+
+
+  <!--CDN scripts follow:-->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+    crossorigin="anonymous"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-autohidingnavbar/4.0.0/jquery.bootstrap-autohidingnavbar.min.js"
+    integrity="sha512-c+Hev/qNHoT1qz8mOOFbF+53VBat8RlCla06HBYNZjF6Y8P4cW73n0RD5mXiQ1AB4M9huCwOqFBWJ+sGA9oDPA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- Auto hide navbar when scrolling down -->
+  <script>$(".navbar.fixed-top").autoHidingNavbar();</script>
+
+  <script src="/assets/scripts/main.js"></script>
+  <script src="/assets/scripts/cookie_utils.js"></script>
+  <script src="/assets/scripts/short-number.js"></script>
+  <script src="/assets/scripts/js-snackbar.js"></script>
+  <script src="/assets/scripts/store.js"></script>
+</body>
+
+</html>
