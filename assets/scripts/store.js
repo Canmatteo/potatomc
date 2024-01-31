@@ -1,12 +1,13 @@
 (async () => {
-    const endpointIp = await getEndpointIp();
+    const ep = await getEndpointIp();
     const session = getCookie('session');
 
     async function validateSession(session) {
-        return await fetch(endpointIp + '/store/is_valid', {
+        return await fetch(ep.i + '/store/is_valid', {
             method: 'POST',
             headers: {
-                session
+                session,
+                ...ep.h
             }
         }).then(res => res.json()).then(res => {
             return res?.isValid || false;
@@ -16,10 +17,11 @@
     }
 
     async function getArticles() {
-        return await fetch(endpointIp + '/store/articles', {
+        return await fetch(ep.i + '/store/articles', {
             method: 'POST',
             headers: {
-                session
+                session,
+                ...ep.h
             }
         }).then(res => res.json()).then(res => {
             return res
@@ -27,10 +29,11 @@
     }
 
     async function getProfile() {
-        return await fetch(endpointIp + '/store/profile', {
+        return await fetch(ep.i + '/store/profile', {
             method: 'POST',
             headers: {
-                session
+                session,
+                ...ep.h
             }
         }).then(res => res.json()).then(res => {
             return res
@@ -191,7 +194,7 @@
     function cartBuy(articles) {
         console.log('buying:', articles)
         return new Promise((resolve, reject) => {
-            fetch(endpointIp + '/store/transactions/buy', { method: 'POST', headers: { session, articles } }).then(res => res.json()).then(res => {
+            fetch(ep.i + '/store/transactions/buy', { method: 'POST', headers: { session, articles, ...ep.h } }).then(res => res.json()).then(res => {
                 if (res.success) {
                     updateProfile()
                     clearCart()
@@ -251,7 +254,7 @@
                           <small class="card-text">${article.description}</small>
                           <hr>
                           <p class="card-text"><p class="text-warning">Preis: <strong>${shortNumber(article.price)} <img src="/assets/image/potato.png" width="20"></strong></p></p>
-                          <button class="btn btn-warning" id="add_to_cart_${article.id}"><i class="bi bi-cart-plus-fill"></i> In den Warenkorb</button>
+                          <button class="btn btn-warning" id="add_to_cart_${article.id}"><i class="bi bi-bag-plus-fill"></i> In den Warenkorb</button>
                         </div>
                       </div>
                     </div>

@@ -37,22 +37,22 @@
           </button>
           <ul class="dropdown-menu">
             <li>
-              <p class="text-warning ms-3 mt-1"><img src="/assets/image/potato.png" width="16"> Potatoes: <strong
+              <p class="text-warning ms-3 mt-1 me-1"><img src="/assets/image/potato.png" width="16"> Potatoes: <strong
                   id="profile_balance">0</strong></p>
             </li>
             <li>
-              <p class="ms-3 mt-1">Rang: <strong id="profile_rank" style="color:gray;">Spieler</strong></p>
+              <p class="ms-3 mt-1 me-1"><i class="bi bi-award"></i> Rang: <strong id="profile_rank" style="color:gray;">Spieler</strong></p>
             </li>
             <li>
-              <p class="ms-3 mt-1">Spielstunden: <strong id="profile_playtime"></strong></p>
+              <p class="ms-3 mt-1 me-1 text-success"><i class="bi bi-clock-history"></i> Spielzeit: <strong id="profile_playtime"></strong></p>
             </li>
-            <li><a class="dropdown-item" href="/logout"><i class="bi bi-door-closed"></i> Abmelden</a></li>
+            <li><a class="dropdown-item bg-warning text-black" href="/logout"><i class="bi bi-door-closed"></i> Abmelden</a></li>
           </ul>
         </div>
 
         <div class="dropstart ms-3" id="cart_dd">
           <button class="btn btn-outline-warning dropdown-toggle" type="button" data-bs-toggle="dropdown"
-            data-bs-auto-close="outside" aria-expanded="false" id="cart_btn"><i class="bi bi-cart"></i>
+            data-bs-auto-close="outside" aria-expanded="false" id="cart_btn"><i class="bi bi-bag"></i>
             Warenkorb</button>
           <ul class="dropdown-menu">
             <li>
@@ -67,8 +67,8 @@
               <hr class="dropdown-divider">
             </li>
             <li>
-              <button id="cart_go_to_checkout" class="dropdown-item btn btn-success">Zur Kasse
-                gehen</button>
+              <button id="cart_go_to_checkout" class="dropdown-item btn btn-success bg-success text-black">Zur Kasse
+                gehen <i class="bi bi-arrow-right-square"></i></button>
             </li>
           </ul>
         </div>
@@ -126,7 +126,7 @@
       <div id="checkout_confirm_loading" class="me-2" style="display:none;"> <span
           class="spinner-border spinner-border-sm" aria-hidden="true"></span>
         <span class="visually-hidden" role="status">Loading...</span>
-      </div> Bezahlen
+      </div> <i class="bi bi-bag-check-fill me-2"></i> Bezahlen
     </button>
   </div>
 

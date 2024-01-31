@@ -1,1 +1,6 @@
-{"i":"http://127.0.0.1:6778"}
+{
+    "i": "https://crack-live-glider.ngrok-free.app",
+    "h": {
+        "ngrok-skip-browser-warning": "nice"
+    }
+}

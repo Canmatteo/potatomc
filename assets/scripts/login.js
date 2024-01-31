@@ -1,5 +1,5 @@
 (async () => {
-    const endpointIp = await getEndpointIp();
+    const ep = await getEndpointIp();
 
     const params = new URL(document.location).searchParams;
     const code = params.get("c")
@@ -13,8 +13,7 @@
     function signIn() {
         $('#instructables').fadeOut('fast', () => {
             $('#loading').fadeIn('fast', () => {
-                console.log(endpointIp + '/store/login?c=' + code)
-                fetch(endpointIp + '/store/login?c=' + code, { method: 'POST' }).then(res => res.json()).then(res => {
+                fetch(ep.i + '/store/login?c=' + code, { method: 'POST',headers:ep.h }).then(res => res.json()).then(res => {
                     if (res.success) {
                         setCookie("session", res.session, 400)
                         window.location.href = "/store"

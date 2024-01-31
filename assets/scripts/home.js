@@ -3,7 +3,8 @@ particlesJS.load('particles-js', '/assets/particlesjs-config.json', function () 
 });
 
 $(document).ready(async () => {
-    fetch(await getEndpointIp() + '/stats').then(res => res.json()).then(res => {
+    const ep = await getEndpointIp();
+    fetch(ep.i + '/stats', { headers: ep.h }).then(res => res.json()).then(res => {
         if (!res.success) return;
         const p = res.stats.players.online;
         $('#players_online').text(p + ' Spieler' + (p === 1 ? '' : 'n'))

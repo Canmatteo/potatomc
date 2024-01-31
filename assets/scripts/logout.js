@@ -1,8 +1,8 @@
 (async () => {
-    const endpointIp = await getEndpointIp();
+    const ep = await getEndpointIp();
 
     $(document).ready(() => {
-        fetch(endpointIp + '/store/logout', { method: 'POST', headers: { session: getCookie('session') } }).then(() => {
+        fetch(ep.i + '/store/logout', { method: 'POST', headers: { session: getCookie('session'),...ep.h } }).then(() => {
             setCookie("session", '')
             window.location.href = "/login"
         })
