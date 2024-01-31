@@ -162,8 +162,8 @@
         $('#checkout_confirm_loading').fadeIn('fast')
 
         cartBuy(getCookie('cart')).then(() => {
-            $('#checkout_confirm_loading').fadeOut('fast',()=>{
-                $('#checkout').fadeOut('fast',()=>{
+            $('#checkout_confirm_loading').fadeOut('fast', () => {
+                $('#checkout').fadeOut('fast', () => {
                     $('#store').fadeIn('fast')
                 })
             })
@@ -174,8 +174,8 @@
                 fixed: true
             })
         }).catch(error => {
-            $('#checkout_confirm_loading').fadeOut('fast',()=>{
-                $('#checkout').fadeOut('fast',()=>{
+            $('#checkout_confirm_loading').fadeOut('fast', () => {
+                $('#checkout').fadeOut('fast', () => {
                     $('#store').fadeIn('fast')
                 })
             })
@@ -204,7 +204,8 @@
     }
 
     function clearCart() {
-        setCookie('cart', JSON.stringify([]), 400)
+        setCookie('cart', JSON.stringify([]), 400);
+        updateCartDropdown();
     }
 
     function updateProfile() {
@@ -214,9 +215,12 @@
             <img src="${profile.avatar}" width="20">
             ${profile.un}`)
             $('#profile_balance').text(profile.balance)
-            const rank = (await getArticle(profile.rank));
-            $('#profile_rank').text(rank.name)
-            $('#profile_rank').css('color', rank.color)
+            if (profile.rank != 'default') {
+                const rank = (await getArticle(profile.rank));
+                $('#profile_rank').text(rank.name)
+                $('#profile_rank').css('color', rank.color)
+            }
+            $('#profile_playtime').text(moment.duration(profile.playtime_hours.now, 'hours').locale('de').humanize())
         })
     }
 
