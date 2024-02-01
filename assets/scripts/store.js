@@ -150,7 +150,7 @@
                 <th scope="row">${i + 1}</th>
                 <td><span style="color:${a.c}";>${a.dm}</span></td>
                 <td>${a.p} <img src="/assets/image/potato.png" width="16"></td>
-                <td>${a.rt} Tag${a.rt != 1 ? 'e' : ''}</td>
+                <td>${a.rt>-1?`${a.rt} Tag${a.rt != 1 ? 'e' : ''}`:'einmalige Einlösung'}</td>
               </tr>
               `)
                 $('#checkout_articles').append(el)
@@ -226,8 +226,8 @@
             const ph = profile.playtime_hours.now; //2
             const phg = profile.playtime_hours.gifted //1
             $('#profile_playtime').text(moment.duration(ph, 'hours').locale('de').humanize())
-            console.log(60-60*(ph-phg))
-            $('#profile_playtime_gift_left').text(moment.duration(60-60*(ph-phg), 'minutes').locale('de').humanize(true))
+            console.log(60 - 60 * (ph - phg))
+            $('#profile_playtime_gift_left').text(moment.duration(60 - 60 * (ph - phg), 'minutes').locale('de').humanize(true))
         })
     }
 
@@ -247,21 +247,23 @@
             getArticles().then(articles => {
                 articles.forEach(article => {
                     const i = $(`
-                    <div class="col-sm ms-3 card bg-transparent blur-bg">
-                    <div class="row g-0 align-items-center">
-                      <div class="col-md-4">
-                        <img src="${article.img}" class="img-fluid">
-                      </div>
-                      <div class="col-md-8">
-                        <div class="card-body">
-                          <h5 class="card-title"><span style="color:${article.color};">${article.name}</span> (${article.run_time} Tag${article.run_time != 1 ? 'e' : ''})</h5>
-                          <small class="card-text">${article.description}</small>
-                          <hr>
-                          <p class="card-text"><p class="text-warning">Preis: <strong>${shortNumber(article.price)} <img src="/assets/image/potato.png" width="20"></strong></p></p>
-                          <button class="btn btn-warning" id="add_to_cart_${article.id}"><i class="bi bi-bag-plus-fill"></i> In den Warenkorb</button>
-                        </div>
-                      </div>
-                    </div>
+                    <div class="col d-flex align-items-stretch">
+<div class="card bg-transparent blur-bg">
+<div class="row g-0 align-items-center">
+<div class="col-md-4 align-itmes-center">
+  <img src="${article.img}" class="img-fluid" style="max-height:200px;">
+</div>
+<div class="col-md-8">
+  <div class="card-body">
+    <h5 class="card-title"><span style="color:${article.color};">${article.name}</span> (${article.run_time > -1 ? `${article.run_time} Tag${article.run_time != 1 ? 'e' : ''}` : 'einmalige Einlösung'})</h5>
+    <small class="card-text">${article.description}</small>
+    <hr>
+    <p class="card-text"><p class="text-warning">Preis: <strong>${shortNumber(article.price)} <img src="/assets/image/potato.png" width="20"></strong></p></p>
+    <button class="btn btn-warning" id="add_to_cart_${article.id}"><i class="bi bi-bag-plus-fill"></i> In den Warenkorb</button>
+  </div>
+</div>
+</div>
+</div>
                   </div>
                     `)
                     $('#articles').append(i)
