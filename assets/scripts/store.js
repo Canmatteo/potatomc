@@ -223,7 +223,11 @@
                 $('#profile_rank').text(rank.name)
                 $('#profile_rank').css('color', rank.color)
             }
-            $('#profile_playtime').text(moment.duration(profile.playtime_hours.now, 'hours').locale('de').humanize())
+            const ph = profile.playtime_hours.now; //2
+            const phg = profile.playtime_hours.gifted //1
+            $('#profile_playtime').text(moment.duration(ph, 'hours').locale('de').humanize())
+            console.log(60-60*(ph-phg))
+            $('#profile_playtime_gift_left').text(moment.duration(60-60*(ph-phg), 'minutes').locale('de').humanize(true))
         })
     }
 
