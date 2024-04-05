@@ -59,14 +59,23 @@
         console.log('previous cart was:', cart);
 
         console.log('max count:', mc)
-        const includes = parseObjectsInArray(cart).filter(a => a.a_id === a_id)?.[0];
+        const includes = parseObjectsInArray(cart).filter(a => a.a_id === a_id).length;
         console.log('includes:', includes)
-        if (mc < 2 && includes) return new SnackBar({
-            status: "danger",
-            icon: "warn",
-            message: "Dieser Artikel kann nur einmal in den Warenkorb hinzugefügt werden!",
-            fixed: true
-        })
+        if (mc === 1 && includes >= 1) {
+            return new SnackBar({
+                status: "danger",
+                icon: "warn",
+                message: "Dieser Artikel kann nur einmal in den Warenkorb hinzugefügt werden!",
+                fixed: true
+            })
+        } else if (includes >= mc) {
+            return new SnackBar({
+                status: "danger",
+                icon: "warn",
+                message: `Die maximale Anzahl dieses Artikels beträgt: ${mc}!`,
+                fixed: true
+            })
+        }
 
         console.log('adding article with id:', a_id);
 
@@ -107,7 +116,8 @@
         })
     }
 
-    function updateCartDropdown(cart) {
+    function updateCartDropdown(cartraw) {
+        const cart = cartraw || [];
         console.log('updating cart dropdown to:', cart)
 
         $('#cart_dd_articles_count').text(cart.length)
@@ -150,7 +160,7 @@
                 <th scope="row">${i + 1}</th>
                 <td><span style="color:${a.c}";>${a.dm}</span></td>
                 <td>${a.p} <img src="/assets/image/potato.png" width="16"></td>
-                <td>${a.rt>-1?`${a.rt} Tag${a.rt != 1 ? 'e' : ''}`:'einmalige Einlösung'}</td>
+                <td>${a.rt > -1 ? `${a.rt} Tag${a.rt != 1 ? 'e' : ''}` : 'einmalige Einlösung'}</td>
               </tr>
               `)
                 $('#checkout_articles').append(el)

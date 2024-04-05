@@ -24,3 +24,8 @@ body {
 .ul-nb {
     list-style-type: none;
 }
+
+.dropdown-menu.scrollable {
+    max-height: 320px;
+    overflow-y: auto;
+}
